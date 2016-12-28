@@ -1,0 +1,7 @@
+#if(${list})
+    #foreach(${userDO} in ${list})
+        ${userDO.id},${userDO.name},${userDO.password}<br>
+    #end
+#else
+目前没有数据!
+#end

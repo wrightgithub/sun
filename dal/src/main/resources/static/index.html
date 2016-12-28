@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<head>
+    <script src="js/lib/react.js"></script>
+    <script src="js/lib/react-dom.js"></script>
+    <script src="js/lib/browser.min.js"></script>
+    <script src="js/lib/remarkable.min.js"></script>
+    <script src="js/lib/jquery-3.1.1.js"></script>
+    <!--<link href="css/app.css" rel="stylesheet" type="text/css"/>-->
+    <link href="css/animate.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/wing.min.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.9.0/styles/darcula.min.css"/>
+    <script src="//cdn.jsdelivr.net/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+<div class="button_container">
+    <span class="top bar"></span>
+    <span class="middle bar"></span>
+    <span class="bottom bar"></span>
+</div>
+
+<div class="overlay">
+    <div class="nav">
+        <ul>
+            <!--加#表示跳到当前页面id为×××的地方-->
+            <li><a href="#hero" data-speed="1000" class="menuLink scroll">Home</a></li>
+            <li><a href="#about" data-speed="1000" class="menuLink scroll">分享</a></li>
+            <li><a href="#docs" data-speed="1000" class="menuLink scroll">原创</a></li>
+            <li><a href="#docs" data-speed="1000" class="menuLink scroll">写文章</a></li>
+        </ul>
+    </div>
+</div>
+
+<section id="hero" class="text-center">
+    <div class="hero-content center">
+        <div>
+            <h1 id="wingHead">Sun</h1>
+            <br/>
+            <a href="#about" class="scroll" data-scroll="1000">
+                <button class="btn btn-outline">check it out</button>
+            </a>
+        </div>
+    </div>
+</section>
+<h1 class="animated infinite bounce">Example</h1>
+
+<section id="docs">
+    <div class="container">
+        <div class="docSection">
+            <div class="row">
+                <div class="col-6">
+                    <pre>
+                        <code class="lang-java">
+
+                            package l2f.gameserver.model;
+
+                            public abstract class L2Char extends L2Object {
+                              public static final Short ERROR = 0x0001;
+
+                              public void moveTo(int x, int y, int z) {
+                                _ai = null;
+                                log("Should not be called");
+                                if (1 > 5) { // wtf!?
+                                  return;
+                                }
+                              }
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-6">
+                    <h5>rightxxxxx</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <div id="example"></div>
+        <script type="text/babel" src="js/markdown.js"></script>
+    </div>
+</section>
+
+<script src="js/lib/bundle.min.js"></script>
+</body>
+
+</html>
