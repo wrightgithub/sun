@@ -7,8 +7,14 @@ class Head extends React.Component {
 
     handleClick(arg) {
         console.log(arg);
-        $.get("/"+arg,function (result) {
+        var ret=$.get("/"+arg,function (result) {
            console.log(result);
+        });
+        console.log(ret);
+
+
+        var ret=$.get("/test?name=妈妈",function (result) {
+            console.log(result);
         });
     }
 

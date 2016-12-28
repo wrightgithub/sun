@@ -1,5 +1,6 @@
 package com.helloxyy.sun.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BlogController {
-
-    @RequestMapping("/1")
+    @RequestMapping(value = "/2")
     public String hello() {
-
-        return "你好";
+        return "hello";
     }
 }
