@@ -73,7 +73,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
   padding: 4rem 0;
 }
 
-#gridExample .col, #gridExample [class^='col-'], #gridExample [class*=" col-"] {
+#head .col, #head [class^='col-'], #head [class*=" col-"] {
   background: #EEE;
   text-align: center;
   border-radius: 5px;
@@ -84,6 +84,10 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
   margin-bottom: .75rem;
   font-weight: bold;
   letter-spacing: .1rem;
+}
+#head1 button{
+  background: #bcdec4;
+  color: black;
 }
 
 #hackButton {

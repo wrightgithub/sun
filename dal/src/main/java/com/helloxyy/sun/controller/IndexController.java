@@ -17,12 +17,7 @@ public class IndexController {
         return "screen/index";
     }
 
-    @RequestMapping("/hello")
-    @ResponseBody
-    public String hello(ModelMap context){
 
-        return "hello";
-    }
 
 
 }

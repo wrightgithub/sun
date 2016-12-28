@@ -17,16 +17,16 @@ class MarkdownEditor extends React.Component {
 
     getRawMarkup() {
         var md = new Remarkable();
-        return {__html:md.render(this.state.value)};
+        return {__html: md.render(this.state.value)};
     }
 
-    componentDidUpdate( prevProps,  prevState){
+    componentDidUpdate(prevProps, prevState) {
         hljs.initHighlighting.called = false;
         hljs.initHighlighting();
         console.log("componentDidUpdate");
     }
 
-    componentDidMount( prevProps,  prevState){
+    componentDidMount(prevProps, prevState) {
         // hljs.initHighlighting();
         console.log("componentDidMount");
     }
@@ -36,13 +36,13 @@ class MarkdownEditor extends React.Component {
 
         return (
             <div className="MarkdownEditor">
-            <h3 className="title">Input</h3>
+                <h3 className="title">Input</h3>
             <textarea style={myarea} onChange={this.handleChange} ref="textarea"
-        defaultValue={this.state.value}/>
-    <h3>Output</h3>
-        <div className="content" dangerouslySetInnerHTML={this.getRawMarkup()}/>
-    </div>
-    );
+                      defaultValue={this.state.value}/>
+                <h3>Output</h3>
+                <div className="content" dangerouslySetInnerHTML={this.getRawMarkup()}/>
+            </div>
+        );
     }
 }
 

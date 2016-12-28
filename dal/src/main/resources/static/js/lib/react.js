@@ -2396,7 +2396,7 @@ var EventPluginHub = {
    * Stores `listener` at `listenerBank[registrationName][id]`. Is idempotent.
    *
    * @param {object} inst The instance, which is the source of events.
-   * @param {string} registrationName Name of listener (e.g. `onClick`).
+   * @param {string} registrationName Name of listener (e.g. `handleClick`).
    * @param {function} listener The callback to store.
    */
   putListener: function (inst, registrationName, listener) {
@@ -2413,7 +2413,7 @@ var EventPluginHub = {
 
   /**
    * @param {object} inst The instance, which is the source of events.
-   * @param {string} registrationName Name of listener (e.g. `onClick`).
+   * @param {string} registrationName Name of listener (e.g. `handleClick`).
    * @return {?function} The stored callback.
    */
   getListener: function (inst, registrationName) {
@@ -2425,7 +2425,7 @@ var EventPluginHub = {
    * Deletes a listener from the registration bank.
    *
    * @param {object} inst The instance, which is the source of events.
-   * @param {string} registrationName Name of listener (e.g. `onClick`).
+   * @param {string} registrationName Name of listener (e.g. `handleClick`).
    */
   deleteListener: function (inst, registrationName) {
     var PluginModule = EventPluginRegistry.registrationNameModules[registrationName];
@@ -3959,9 +3959,9 @@ function getListeningForDocument(mountAt) {
  * `ReactBrowserEventEmitter` is used to attach top-level event listeners. For
  * example:
  *
- *   EventPluginHub.putListener('myID', 'onClick', myFunction);
+ *   EventPluginHub.putListener('myID', 'handleClick', myFunction);
  *
- * This would allocate a "registration" of `('onClick', myFunction)` on 'myID'.
+ * This would allocate a "registration" of `('handleClick', myFunction)` on 'myID'.
  *
  * @internal
  */
@@ -4018,7 +4018,7 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
    * Also, `keyup`/`keypress`/`keydown` do not bubble to the window on IE, but
    * they bubble to document.
    *
-   * @param {string} registrationName Name of listener (e.g. `onClick`).
+   * @param {string} registrationName Name of listener (e.g. `handleClick`).
    * @param {object} contentDocumentHandle Document which owns the container
    */
   listenTo: function (registrationName, contentDocumentHandle) {
@@ -6646,7 +6646,7 @@ var globalIdCounter = 1;
  * React components. It accepts event listeners and DOM properties that are
  * valid according to `DOMProperty`.
  *
- *  - Event listeners: `onClick`, `onMouseDown`, etc.
+ *  - Event listeners: `handleClick`, `onMouseDown`, etc.
  *  - DOM properties: `className`, `name`, `title`, etc.
  *
  * The `style` property functions differently from the DOM API. It accepts an
@@ -7064,7 +7064,7 @@ ReactDOMComponent.Mixin = {
         if (lastProps[propKey]) {
           // Only call deleteListener if there was a listener previously or
           // else willDeleteListener gets called when there wasn't actually a
-          // listener (e.g., onClick={null})
+          // listener (e.g., handleClick={null})
           deleteListener(this, propKey);
         }
       } else if (DOMProperty.properties[propKey] || DOMProperty.isCustomAttribute(propKey)) {
@@ -12269,7 +12269,7 @@ var invariant = _dereq_(156);
  *   var MyComponent = React.createClass({
  *     render: function() {
  *       return (
- *         <div onClick={this.handleClick}>
+ *         <div handleClick={this.handleClick}>
  *           <CustomComponent ref="custom" />
  *         </div>
  *       );

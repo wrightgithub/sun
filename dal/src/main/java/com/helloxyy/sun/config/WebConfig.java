@@ -3,12 +3,14 @@ package com.helloxyy.sun.config;
 import org.springframework.boot.autoconfigure.velocity.VelocityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver;
-
 
 /**
  * WEB配置
@@ -17,19 +19,15 @@ import org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver;
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-
-
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // add default page
-      //  registry.addViewController("/acl/permissions.htm").setViewName("common/permissions");
+        // registry.addViewController("/acl/permissions.htm").setViewName("common/permissions");
         registry.addViewController("/index.htm").setViewName("index");
         registry.addViewController("/").setViewName("screen/index");
     }
@@ -42,5 +40,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+//    @Bean
+//    @Order(Ordered.HIGHEST_PRECEDENCE)
+//    CharacterEncodingFilter characterEncodingFilter() {
+//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+//        filter.setEncoding("UTF-8");
+//        filter.setForceEncoding(true);
+//        return filter;
+//    }
 
 }
