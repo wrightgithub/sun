@@ -1,0 +1,86 @@
+
+
+<div class="button_container">
+    <span class="top bar"></span>
+    <span class="middle bar"></span>
+    <span class="bottom bar"></span>
+</div>
+
+<div class="overlay">
+    <div class="nav">
+        <ul>
+            <!--加#表示跳到当前页面id为×××的地方-->
+            <li><a href="#hero" data-speed="1000" class="menuLink scroll">Home</a></li>
+            <li><a href="#about" data-speed="1000" class="menuLink scroll">分享</a></li>
+            <li><a href="#docs" data-speed="1000" class="menuLink scroll">原创</a></li>
+            <li><a href="#docs" data-speed="1000" class="menuLink scroll">写文章</a></li>
+        </ul>
+    </div>
+</div>
+
+<section id="hero" class="text-center">
+    <div class="hero-content center">
+        <div>
+            <h1 id="wingHead">Sun</h1>
+            <br/>
+            <a href="#about" class="scroll" data-scroll="1000">
+                <button class="btn btn-outline">check it out</button>
+            </a>
+        </div>
+    </div>
+</section>
+<div><h1 class="animated infinite bounce">for everyone</h1></div>
+
+
+
+<div id="head1" class="container"></div>
+<script type="text/babel" src="/static/js/head.js"></script>
+
+
+<!-- start header -->
+<!---//End-header--->
+
+<div id="articles"></div>
+<script type="text/babel" src="/static/js/article.js"></script>
+
+
+##<article class="markdown-body">
+##    <h1>Unicorns</h1>
+##    <p>All the things</p>
+##</article>
+
+<section id="test">
+    <div class="container">
+        <div class="docSection">
+            <div class="row">
+                <div class="col-6">
+                    <pre>
+                        <code class="lang-java">
+
+                            package l2f.gameserver.model;
+
+                            public abstract class L2Char extends L2Object {
+                              public static final Short ERROR = 0x0001;
+
+                              public void moveTo(int x, int y, int z) {
+                                _ai = null;
+                                log("Should not be called");
+                                if (1 > 5) { // wtf!?
+                                  return;
+                                }
+                              }
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-6">
+                    <h5>rightxxxxx</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="example"></div>
+        <script type="text/babel" src="/static/js/markdown.js"></script>
+    </div>
+</section>

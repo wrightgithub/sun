@@ -10,7 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.helloxyy.sun</groupId>
-    <artifactId>biz</artifactId>
+    <artifactId>dal</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.12</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
