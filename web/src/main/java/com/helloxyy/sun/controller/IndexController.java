@@ -1,5 +1,6 @@
 package com.helloxyy.sun.controller;
 
+import ch.qos.logback.core.util.TimeUtil;
 import com.alibaba.fastjson.JSON;
 import com.helloxyy.sun.module.Article;
 import org.springframework.stereotype.Controller;
@@ -17,12 +18,13 @@ import java.util.*;
 @RequestMapping(value = "/", produces = "text/html;charset=UTF-8")
 public class IndexController {
 
-    @RequestMapping("/")
+    @RequestMapping(value = {"/","/index"})
     public String index(ModelMap context) {
 
         context.put("name", "程序员的微生活");
         return "screen/index";
     }
+
 
 
     @RequestMapping("/1")

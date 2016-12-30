@@ -1,9 +1,11 @@
 package com.helloxyy.sun.module;
 
+import java.io.Serializable;
+
 /**
  * Created by xyy on 16-12-30.
  */
-public class Article {
+public class Article implements Serializable {
 
     private String imgSrc;
     private String date;

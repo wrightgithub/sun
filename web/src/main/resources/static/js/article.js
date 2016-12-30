@@ -1,19 +1,25 @@
 'use strict';
 
-// import {sex,echo} from "./head.js";
-//
-// console.log(sex)   // boy
-// echo(sex) // boy
-
 const hstyle = {
-    margin: '0',
-    padding: '0',
-    border: '0',
+    margin: 0,
+    padding: 0,
+    border: 0,
     fontSize: '100%',
     font: 'inherit',
     verticalAlign: 'baseline',
 }
 
+const refreshButton = {
+    position: 'fixed',
+    width: '7%',
+    height: '6%',
+    zIndex: 100,
+    left: '1%',
+    mixBlendMode: 'difference',
+    background: '#606c76',
+    top: '2%',
+    cursor: 'pointer',
+}
 
 class Image extends React.Component {
 
@@ -30,7 +36,7 @@ class Image extends React.Component {
 class Text extends React.Component {
 
     render() {
-        var article=this.props.article;
+        var article = this.props.article;
         return (
             <div className="text-right">
                 <h6 style={hstyle}>{article.date}</h6>
@@ -77,34 +83,47 @@ class BlogGrid extends React.Component {
 
 class Blog extends React.Component {
 
+
+    render() {
+
+        var temp = this.props.temp;
+        return (
+            temp.articles != null &&
+            <div className="wrap">
+                <div className="blog-head">
+                    <h3 >{temp.head}</h3>
+                    <p>{temp.info}</p>
+                </div>
+                <BlogGrid articles={[temp.articles[0],temp.articles[1]]}/>
+                <BlogGrid articles={[temp.articles[2],temp.articles[3]]}/>
+            </div>
+
+
+        );
+    }
+}
+
+class ShareBlog extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            articles: null,
+            head: 'BLOG',
+            info: 'Proin iaculis purus consequat sem cure.',
+        };
     }
 
     getArticles() {
         $.get("/articles", function (result) {
-            console.log(result);
-            this.setState({
-                articles: result
-            });
+            this.setState({articles: result});
             console.log(result);
         }.bind(this));
-
-    }
-
-
-    componentDidUpdate(prevProps, prevState) {
-
     }
 
     componentWillMount(prevProps, prevState) {
         this.getArticles();
     }
 
-    // componentDidMount(prevProps, prevState) {
-    //     this.getArticles();
-    // }
 
     handleClick() {
         this.getArticles();
@@ -113,22 +132,51 @@ class Blog extends React.Component {
     render() {
         return (
             <div className="blog s3" id="blog">
-                <button className="btn btn-outline" onClick={this.handleClick.bind(this)}>refresh</button>
-                <div className="wrap">
-                    <div className="blog-head">
-                        <h3 >BLOG</h3>
-                        <p>Proin iaculis purus consequat sem cure.</p>
-                    </div>
-                    <BlogGrid articles={[this.state.articles[0],this.state.articles[1]]}/>
-                    <BlogGrid articles={[this.state.articles[2],this.state.articles[3]]}/>
-                </div>
+                <button style={refreshButton} onClick={this.handleClick.bind(this)}>refresh</button>
+                <Blog temp={this.state}/>
             </div>
         );
     }
 }
 
+class OriginalBlog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            articles: null,
+            head: 'Original',
+            info: 'Proin iaculis purus consequat sem cure.',
+        };
+    }
+
+    getArticles() {
+        $.get("/original", function (result) {
+            this.setState({articles: result});
+            console.log(result);
+        }.bind(this));
+    }
+
+    componentWillMount(prevProps, prevState) {
+        this.getArticles();
+    }
+
+
+    handleClick() {
+        this.getArticles();
+    }
+
+    render() {
+        return (
+            <div className="blog s3" id="blog">
+                <Blog temp={this.state}/>
+            </div>
+        );
+    }
+}
+
+
 // var dom=$("#blog.wrap")[0];
-ReactDOM.render(<Blog />, document.getElementById("articles"));
+ReactDOM.render(<ShareBlog />, document.getElementById("articles"));
 
-
+ReactDOM.render(<OriginalBlog />, document.getElementById("original"));
 // img,time,title,digest

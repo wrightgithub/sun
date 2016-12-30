@@ -23,8 +23,8 @@
         <div>
             <h1 id="wingHead">Sun</h1>
             <br/>
-            <a href="#about" class="scroll" data-scroll="1000">
-                <button class="btn btn-outline">check it out</button>
+            <a href="#articles" class="scroll" data-scroll="1000">
+                <button class="btn btn-outline">go to see</button>
             </a>
         </div>
     </div>
@@ -36,18 +36,13 @@
 <div id="head1" class="container"></div>
 <script type="text/babel" src="/static/js/head.js"></script>
 
-
 <!-- start header -->
 <!---//End-header--->
 
 <div id="articles"></div>
 <script type="text/babel" src="/static/js/article.js"></script>
 
-
-##<article class="markdown-body">
-##    <h1>Unicorns</h1>
-##    <p>All the things</p>
-##</article>
+<div id="original"></div>
 
 <section id="test">
     <div class="container">
