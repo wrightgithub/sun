@@ -33,14 +33,16 @@
 
 
 
-<div id="head1" class="container"></div>
-<script type="text/babel" src="/static/js/head.js"></script>
+##<div id="head1" class="container"></div>
+##<script type="text/babel" src="/static/js/head.js"></script>
 
 <!-- start header -->
 <!---//End-header--->
 
 <div id="articles"></div>
-<script type="text/babel" src="/static/js/article.js"></script>
+<div id="root"></div>
+<script src="/static/build/bundle.js"></script>
+##<script type="text/babel" src="/static/js/article.js"></script>
 
 <div id="original"></div>
 

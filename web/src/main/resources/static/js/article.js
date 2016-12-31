@@ -103,7 +103,7 @@ class Blog extends React.Component {
     }
 }
 
-class ShareBlog extends React.Component {
+export default class ShareBlog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
