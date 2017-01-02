@@ -22,3 +22,17 @@
         return filter;
     }
     ```
+2. react 获取 form提交数据，用ref属性 比较方便。也可用state对一些关键属性的提交操作
+
+3. react + webpack 模块化开发非常爽,做到了组件复用。
+
+4. ajax --post-> springboot  
+    + [springboot 配置](http://stackoverflow.com/questions/29313687/trying-to-use-spring-boot-rest-to-read-json-string-from-post)
+    + 如何 需要send json   jquery 要配置"Content-Type": "application/json;charset=UTF-8"
+      默认不是这个格式。
+      [jquery 设置headers](http://www.cnblogs.com/itjeff/p/6007181.html)
+
+# 数据库设计
+
+
+

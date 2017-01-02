@@ -81,7 +81,7 @@ class BlogGrid extends React.Component {
     }
 }
 
-class Blog extends React.Component {
+export  class Blog extends React.Component {
 
 
     render() {
@@ -108,8 +108,8 @@ export default class ShareBlog extends React.Component {
         super(props);
         this.state = {
             articles: null,
-            head: 'BLOG',
-            info: 'Proin iaculis purus consequat sem cure.',
+            head: 'Share',
+            info: 'best articles for everyone',
         };
     }
 
@@ -139,44 +139,9 @@ export default class ShareBlog extends React.Component {
     }
 }
 
-class OriginalBlog extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            articles: null,
-            head: 'Original',
-            info: 'Proin iaculis purus consequat sem cure.',
-        };
-    }
-
-    getArticles() {
-        $.get("/original", function (result) {
-            this.setState({articles: result});
-            console.log(result);
-        }.bind(this));
-    }
-
-    componentWillMount(prevProps, prevState) {
-        this.getArticles();
-    }
-
-
-    handleClick() {
-        this.getArticles();
-    }
-
-    render() {
-        return (
-            <div className="blog s3" id="blog">
-                <Blog temp={this.state}/>
-            </div>
-        );
-    }
-}
 
 
 // var dom=$("#blog.wrap")[0];
-ReactDOM.render(<ShareBlog />, document.getElementById("articles"));
+//  ReactDOM.render(<ShareBlog />, document.getElementById("articles"));
 
-ReactDOM.render(<OriginalBlog />, document.getElementById("original"));
 // img,time,title,digest

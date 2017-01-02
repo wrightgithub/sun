@@ -11,6 +11,7 @@ public class Article implements Serializable {
     private String date;
     private String title;
     private String digest;// 摘要
+    private String link;
 
     public Article(String date, String digest, String imgSrc, String title) {
         this.date = date;
@@ -51,4 +52,11 @@ public class Article implements Serializable {
         this.title = title;
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 }

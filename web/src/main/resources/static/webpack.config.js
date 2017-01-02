@@ -3,13 +3,14 @@ var path = require('path');
 
 module.exports = {
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
-    './js/index.js'
+    // 'webpack/hot/dev-server',
+    // 'webpack-dev-server/client?http://localhost:8080',
+    './js/app.js'
   ],
   output: {
     path: path.resolve("./build"),
     filename: 'bundle.js',
+    // publicPath: '/static'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

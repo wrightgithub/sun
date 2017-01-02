@@ -1,5 +1,8 @@
 package com.helloxyy.sun.utils;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
 import java.io.*;
 import java.nio.channels.FileChannel;
 
@@ -8,30 +11,45 @@ import java.nio.channels.FileChannel;
  */
 public class FileUtil {
 
+    public static String readRelativeFile(String path) throws IOException {
+        return FileUtil.read(new ClassPathResource(path).getFile());
+    }
+
     public static String read(String fileName) throws IOException {
+
+        BufferedReader e = new BufferedReader(new FileReader((new File(fileName)).getAbsoluteFile()));
+        return getFileString(e);
+    }
+
+    public static String read(File file) throws IOException {
+
+        BufferedReader e = new BufferedReader(new FileReader((file).getAbsoluteFile()));
+        return getFileString(e);
+    }
+
+    private static String getFileString(BufferedReader e) throws IOException {
         StringBuilder sb = new StringBuilder();
-            BufferedReader e = new BufferedReader(new FileReader((new File(fileName)).getAbsoluteFile()));
-            String s;
-            try {
-                while ((s = e.readLine()) != null) {
-                    sb.append(s);
-                    sb.append("\n");
-                }
-            } finally {
-                e.close();
+        String s;
+        try {
+            while ((s = e.readLine()) != null) {
+                sb.append(s);
+                sb.append("\n");
             }
+        } finally {
+            e.close();
+        }
 
         return sb.toString();
     }
 
     public static void write(String fileName, String text) throws IOException {
-            PrintWriter e = new PrintWriter((new File(fileName)).getAbsoluteFile());
+        PrintWriter e = new PrintWriter((new File(fileName)).getAbsoluteFile());
 
-            try {
-                e.print(text);
-            } finally {
-                e.close();
-            }
+        try {
+            e.print(text);
+        } finally {
+            e.close();
+        }
 
     }
 
@@ -80,15 +98,15 @@ public class FileUtil {
         try {
             File file = new File(fileName);
             File fileParent = file.getParentFile();
-            if (fileParent!=null&&!fileParent.exists()){
+            if (fileParent != null && !fileParent.exists()) {
                 fileParent.mkdirs();
             }
             output = new FileOutputStream(file);
             output.write(bytes);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             output.close();
         }
         return false;

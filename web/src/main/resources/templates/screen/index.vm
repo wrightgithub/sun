@@ -1,5 +1,3 @@
-
-
 <div class="button_container">
     <span class="top bar"></span>
     <span class="middle bar"></span>
@@ -29,55 +27,12 @@
         </div>
     </div>
 </section>
-<div><h1 class="animated infinite bounce">for everyone</h1></div>
+<div><h1 class="animated infinite bounce">Sun for everyone</h1></div>
 
 
+<div id="head1" class="container"></div>
+<script type="text/babel" src="/static/js/head.js"></script>
 
-##<div id="head1" class="container"></div>
-##<script type="text/babel" src="/static/js/head.js"></script>
-
-<!-- start header -->
-<!---//End-header--->
-
-<div id="articles"></div>
-<div id="root"></div>
+<div id="sunapp"></div>
 <script src="/static/build/bundle.js"></script>
-##<script type="text/babel" src="/static/js/article.js"></script>
 
-<div id="original"></div>
-
-<section id="test">
-    <div class="container">
-        <div class="docSection">
-            <div class="row">
-                <div class="col-6">
-                    <pre>
-                        <code class="lang-java">
-
-                            package l2f.gameserver.model;
-
-                            public abstract class L2Char extends L2Object {
-                              public static final Short ERROR = 0x0001;
-
-                              public void moveTo(int x, int y, int z) {
-                                _ai = null;
-                                log("Should not be called");
-                                if (1 > 5) { // wtf!?
-                                  return;
-                                }
-                              }
-                            }
-                        </code>
-                    </pre>
-                </div>
-                <div class="col-6">
-                    <h5>rightxxxxx</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div id="example"></div>
-        <script type="text/babel" src="/static/js/markdown.js"></script>
-    </div>
-</section>

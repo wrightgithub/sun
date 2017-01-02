@@ -1,46 +1,40 @@
 'use strict';
+import {Blog} from './article';
+export default class OriginalBlog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            articles: null,
+            head: 'Blog',
+            info: 'Original Blog ',
+        };
+    }
 
-class Image extends React.Component {
+    getArticles() {
+        $.get("/original", function (result) {
+            this.setState({articles: result});
+            console.log(result);
+        }.bind(this));
+    }
 
+    componentWillMount(prevProps, prevState) {
+        this.getArticles();
+    }
+
+
+    handleClick() {
+        this.getArticles();
+    }
 
     render() {
         return (
-            <div className="img-left">
-                <img src="/static/img/blog1.jpg" alt=""/>
+            <div className="blog s3" id="blog">
+                <Blog temp={this.state}/>
             </div>
         );
     }
 }
 
-class Text extends React.Component {
-
-    render() {
-        // var blog = this.props.blog;
-        return (
-            <div className="text-right">
-                <h6 >date</h6>
-                <h3 ><a href="#">title</a></h3>
-                <img src="/static/img/line.png" alt=""/>
-                <p>摘要</p>
-                <p><a href="#">MORE</a></p>
-            </div>
-        );
-    }
-}
-
-
-class Original extends React.Component {
-    render() {
-        return (
-            <div className="row">
-                <Image />
-                <Text />
-            </div>
-        );
-    }
-}
-
-ReactDOM.render(<Original />, document.getElementById("original"));
 
 
 // img,time,title,digest

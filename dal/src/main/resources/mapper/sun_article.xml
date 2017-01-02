@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.helloxyy.sun.mapper.ArticleMapper">
+    <resultMap id="baseColumnMap" type="com.helloxyy.sun.modle.ArticleDo">
+        <result column="id" property="id" jdbcType="BIGINT"/>  <!--前面是数据库的列，后面是类的对应字段-->
+        <result column="titile" property="title" jdbcType="VARCHAR"/>
+        <result column="imgsrc" property="imgSrc" jdbcType="VARCHAR"/>
+        <result column="create_time" property="date" jdbcType="VARCHAR"/>
+        <result column="digest" property="digest" jdbcType="VARCHAR"/>
+        <result column="link" property="link" jdbcType="VARCHAR"/>
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="allColumn">
+    id, title ,imgsrc,create_time,digest,link,path
+    </sql>
+
+    <sql id="baseColumn">
+        title ,imgsrc,create_time,digest,link,path
+    </sql>
+
+    <select id="findAll" resultMap="baseColumnMap">
+        SELECT <include refid="allColumn"/> FROM article
+    </select>
+
+    <!--<select id="findActorById" parameterType="int" resultMap="baseColumnMap" flushCache="true">-->
+    <!--SELECT * FROM actor  where actor_id =#{actorId};-->
+    <!--</select>-->
+
+    <!--<select id="findActor" parameterType="int" resultMap="baseColumnMap">-->
+    <!--SELECT * FROM actor  where actor_id =#{actorId};-->
+    <!--</select>-->
+
+    <select id="insert" parameterType="java.util.HashMap">
+        INSERT INTO article(<include refid="baseColumn"/>)
+        VALUES (
+        #{article.title},
+        #{article.imgSrc},
+        #{article.date},
+        #{article.digest},
+        #{article.link},
+        #{article.path}
+        )
+    </select>
+
+    <!--<select id="update" parameterType="java.util.HashMap">-->
+    <!--UPDATE actor-->
+    <!--<set>-->
+    <!--actor_id= #{actor.actorId},-->
+    <!--first_name= #{actor.firstName},-->
+    <!--last_name=#{actor.lastName},-->
+    <!--last_update=#{actor.lastUpdate}-->
+    <!--</set>-->
+    <!--WHERE  actor_id=#{actor.actorId}-->
+    <!--</select>-->
+</mapper>
