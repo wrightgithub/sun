@@ -16,7 +16,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping(value = "/", produces = "text/html;charset=UTF-8")
-public class IndexController {
+public class ScreenController {
 
     @Value("${blog.path}")
     private String blogPath;
@@ -31,29 +31,20 @@ public class IndexController {
     @RequestMapping("/originalBlog")
     public String loadMyBlog(ModelMap context) {
 
-        try {
-            String blog= FileUtil.read(blogPath+"test.md");
-            context.put("blog", blog);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String blog= FileUtil.read(blogPath+"test.md");
+//            context.put("blog", blog);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         return "screen/originalBlog";
     }
 
+    @RequestMapping(value = "/admin", produces = "text/html;charset=UTF-8")
+    public String submitArticlesView(ModelMap context) {
 
-
-    @RequestMapping("/1")
-    @ResponseBody()
-    public String button() {
-        return "你好";
-    }
-
-    @RequestMapping("/test")
-    @ResponseBody()
-    public String mama(@RequestParam String name) {
-        System.out.println(name);
-        return "mama";
+        return "screen/admin";
     }
 
 }

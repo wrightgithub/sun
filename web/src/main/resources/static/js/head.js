@@ -8,12 +8,10 @@ class Button extends React.Component {
 
 
     handleClick(arg) {
-        $.get("/" + arg, function (result) {
-            console.log(result);
-            this.setState({name: result});
-        }.bind(this));
-
-
+        // $.get("/" + arg, function (result) {
+        //     console.log(result);
+        //     this.setState({name: result});
+        // }.bind(this));
     }
 
 

@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "bdaa94e636cb7a50da09"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "40d7c983582241669e32"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -656,13 +656,23 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	exports.copyarr = copyarr;
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var hstyle = {
+	function copyarr(arr, start, end) {
+	    var four_article = [];
+	    for (var i = start; i <= end; i++) {
+	        four_article.push(arr[i]);
+	    }
+
+	    return four_article;
+	}
+	var hstyle = exports.hstyle = {
 	    margin: 0,
 	    padding: 0,
 	    border: 0,
@@ -732,7 +742,7 @@
 	                    { style: hstyle },
 	                    React.createElement(
 	                        'a',
-	                        { href: '#' },
+	                        { href: article.link },
 	                        article.title
 	                    )
 	                ),
@@ -747,7 +757,7 @@
 	                    null,
 	                    React.createElement(
 	                        'a',
-	                        { href: '#' },
+	                        { href: article.link },
 	                        'MORE'
 	                    )
 	                )
@@ -761,17 +771,11 @@
 	var LinkArticle = function (_React$Component3) {
 	    _inherits(LinkArticle, _React$Component3);
 
-	    function LinkArticle(props) {
-	        _classCallCheck(this, LinkArticle);
-
-	        return _possibleConstructorReturn(this, (LinkArticle.__proto__ || Object.getPrototypeOf(LinkArticle)).call(this, props));
-	    }
-
 	    _createClass(LinkArticle, [{
 	        key: 'render',
 	        value: function render() {
 	            var article = this.props.article;
-	            return React.createElement(
+	            return article != undefined && article != null && React.createElement(
 	                'div',
 	                { className: this.props.className },
 	                React.createElement(Image, { src: article.imgSrc }),
@@ -780,6 +784,12 @@
 	            );
 	        }
 	    }]);
+
+	    function LinkArticle(props) {
+	        _classCallCheck(this, LinkArticle);
+
+	        return _possibleConstructorReturn(this, (LinkArticle.__proto__ || Object.getPrototypeOf(LinkArticle)).call(this, props));
+	    }
 
 	    return LinkArticle;
 	}(React.Component);
@@ -826,20 +836,6 @@
 	            return temp.articles != null && React.createElement(
 	                'div',
 	                { className: 'wrap' },
-	                React.createElement(
-	                    'div',
-	                    { className: 'blog-head' },
-	                    React.createElement(
-	                        'h3',
-	                        null,
-	                        temp.head
-	                    ),
-	                    React.createElement(
-	                        'p',
-	                        null,
-	                        temp.info
-	                    )
-	                ),
 	                React.createElement(BlogGrid, { articles: [temp.articles[0], temp.articles[1]] }),
 	                React.createElement(BlogGrid, { articles: [temp.articles[2], temp.articles[3]] })
 	            );
@@ -849,27 +845,42 @@
 	    return Blog;
 	}(React.Component);
 
-	var ShareBlog = function (_React$Component6) {
-	    _inherits(ShareBlog, _React$Component6);
+	var TempBlog = exports.TempBlog = function (_React$Component6) {
+	    _inherits(TempBlog, _React$Component6);
 
-	    function ShareBlog(props) {
-	        _classCallCheck(this, ShareBlog);
+	    function TempBlog(props) {
+	        _classCallCheck(this, TempBlog);
 
-	        var _this6 = _possibleConstructorReturn(this, (ShareBlog.__proto__ || Object.getPrototypeOf(ShareBlog)).call(this, props));
+	        var _this6 = _possibleConstructorReturn(this, (TempBlog.__proto__ || Object.getPrototypeOf(TempBlog)).call(this, props));
 
 	        _this6.state = {
 	            articles: null,
-	            head: 'Share',
-	            info: 'best articles for everyone'
+	            four_article: [],
+	            next_index: 0
 	        };
 	        return _this6;
 	    }
 
-	    _createClass(ShareBlog, [{
+	    _createClass(TempBlog, [{
 	        key: 'getArticles',
 	        value: function getArticles() {
-	            $.get("/articles", function (result) {
-	                this.setState({ articles: result });
+	            $.get(this.props.temp.ajaxurl, function (result) {
+	                var four_article = [];
+	                var next_index = 0;
+	                if (result.length <= 4) {
+	                    four_article = result;
+	                    next_index = result.length - 1;
+	                } else {
+	                    four_article = copyarr(result, 0, 3);
+	                    next_index = 3;
+	                }
+
+	                this.setState({
+	                    articles: result,
+	                    four_article: four_article,
+	                    next_index: next_index
+	                });
+	                console.log("next_index:" + this.state.next_index);
 	                console.log(result);
 	            }.bind(this));
 	        }
@@ -879,9 +890,49 @@
 	            this.getArticles();
 	        }
 	    }, {
-	        key: 'handleClick',
-	        value: function handleClick() {
-	            this.getArticles();
+	        key: 'handleNextClick',
+	        value: function handleNextClick() {
+	            var next_index = this.state.next_index;
+	            var len = this.state.articles.length;
+	            if (next_index >= len - 1) {
+	                return;
+	            }
+	            var four_article = this.state.four_article;
+
+	            if (len - 1 - next_index <= 4) {
+	                four_article = copyarr(this.state.articles, next_index + 1, len - 1);
+	                next_index = len - 1;
+	            } else {
+	                four_article = copyarr(this.state.articles, next_index + 1, next_index + 4);
+	                next_index = next_index + 4;
+	            }
+	            console.log(four_article);
+	            console.log(next_index);
+	            this.setState({
+	                four_article: four_article,
+	                next_index: next_index
+	            });
+	        }
+	    }, {
+	        key: 'handlePreClick',
+	        value: function handlePreClick() {
+	            var pre_index = this.state.next_index - this.state.four_article.length;
+	            if (pre_index < 0) {
+	                return;
+	            }
+	            var four_article = this.state.four_article;
+
+	            if (pre_index - 4 <= 0) {
+	                four_article = copyarr(this.state.articles, 0, pre_index);
+	            } else {
+	                four_article = copyarr(this.state.articles, pre_index - 3, pre_index);
+	            }
+	            console.log(four_article);
+	            console.log("pre_index:" + pre_index);
+	            this.setState({
+	                four_article: four_article,
+	                next_index: pre_index
+	            });
 	        }
 	    }, {
 	        key: 'render',
@@ -890,23 +941,84 @@
 	                'div',
 	                { className: 'blog s3', id: 'blog' },
 	                React.createElement(
-	                    'button',
-	                    { style: refreshButton, onClick: this.handleClick.bind(this) },
-	                    'refresh'
+	                    'div',
+	                    { className: 'container' },
+	                    React.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        React.createElement(
+	                            'div',
+	                            { className: 'col-1' },
+	                            React.createElement(
+	                                'button',
+	                                { className: 'btn btn-outline-inverted', onClick: this.handlePreClick.bind(this) },
+	                                'pre'
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'div',
+	                            { className: 'col-1' },
+	                            React.createElement(
+	                                'button',
+	                                { className: 'btn btn-outline-inverted', onClick: this.handleNextClick.bind(this) },
+	                                'next'
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'div',
+	                            { className: 'blog-head' },
+	                            React.createElement(
+	                                'h3',
+	                                null,
+	                                this.props.temp.head
+	                            ),
+	                            React.createElement(
+	                                'p',
+	                                null,
+	                                this.props.temp.info
+	                            )
+	                        )
+	                    )
 	                ),
-	                React.createElement(Blog, { temp: this.state })
+	                React.createElement(Blog, { temp: {
+	                        articles: this.state.four_article,
+	                        head: this.state.head,
+	                        info: this.state.info
+	                    } })
+	            );
+	        }
+	    }]);
+
+	    return TempBlog;
+	}(React.Component);
+
+	var ShareBlog = function (_React$Component7) {
+	    _inherits(ShareBlog, _React$Component7);
+
+	    function ShareBlog() {
+	        _classCallCheck(this, ShareBlog);
+
+	        return _possibleConstructorReturn(this, (ShareBlog.__proto__ || Object.getPrototypeOf(ShareBlog)).apply(this, arguments));
+	    }
+
+	    _createClass(ShareBlog, [{
+	        key: 'render',
+	        value: function render() {
+
+	            return React.createElement(
+	                'div',
+	                null,
+	                React.createElement(TempBlog, { temp: {
+	                        head: 'Share',
+	                        info: 'best articles for everyone',
+	                        ajaxurl: '/articles'
+	                    } })
 	            );
 	        }
 	    }]);
 
 	    return ShareBlog;
 	}(React.Component);
-
-	// var dom=$("#blog.wrap")[0];
-	//  ReactDOM.render(<ShareBlog />, document.getElementById("articles"));
-
-	// img,time,title,digest
-
 
 	exports.default = ShareBlog;
 
@@ -933,53 +1045,30 @@
 	var OriginalBlog = function (_React$Component) {
 	    _inherits(OriginalBlog, _React$Component);
 
-	    function OriginalBlog(props) {
+	    function OriginalBlog() {
 	        _classCallCheck(this, OriginalBlog);
 
-	        var _this = _possibleConstructorReturn(this, (OriginalBlog.__proto__ || Object.getPrototypeOf(OriginalBlog)).call(this, props));
-
-	        _this.state = {
-	            articles: null,
-	            head: 'Blog',
-	            info: 'Original Blog '
-	        };
-	        return _this;
+	        return _possibleConstructorReturn(this, (OriginalBlog.__proto__ || Object.getPrototypeOf(OriginalBlog)).apply(this, arguments));
 	    }
 
 	    _createClass(OriginalBlog, [{
-	        key: 'getArticles',
-	        value: function getArticles() {
-	            $.get("/original", function (result) {
-	                this.setState({ articles: result });
-	                console.log(result);
-	            }.bind(this));
-	        }
-	    }, {
-	        key: 'componentWillMount',
-	        value: function componentWillMount(prevProps, prevState) {
-	            this.getArticles();
-	        }
-	    }, {
-	        key: 'handleClick',
-	        value: function handleClick() {
-	            this.getArticles();
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
+
 	            return React.createElement(
 	                'div',
-	                { className: 'blog s3', id: 'blog' },
-	                React.createElement(_article.Blog, { temp: this.state })
+	                null,
+	                React.createElement(_article.TempBlog, { temp: {
+	                        head: 'Blog',
+	                        info: 'Original Blog ',
+	                        ajaxurl: '/original'
+	                    } })
 	            );
 	        }
 	    }]);
 
 	    return OriginalBlog;
 	}(React.Component);
-
-	// img,time,title,digest
-
 
 	exports.default = OriginalBlog;
 

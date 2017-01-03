@@ -7,7 +7,7 @@ class OriginalDetail extends React.Component {
     }
 
     getBlog() {
-        $.get("/blogdetail", function (result) {
+        $.get("/originaldetail", function (result) {
             // console.log(result);
             this.setState({value: result});
         }.bind(this));

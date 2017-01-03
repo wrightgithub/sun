@@ -35,6 +35,7 @@ class SubmitArticles extends React.Component {
              */
             data: JSON.stringify(submitData),
             success: function (data, textStatus, jqXHR) {
+                alert("数据：" + data + "\n状态：" + textStatus);
                 console.log("数据：" + data + "\n状态：" + textStatus);
             }
         });
@@ -66,7 +67,9 @@ class SubmitArticles extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-12"><textarea ref="digest" type="text" placeholder="摘要"></textarea></div>
+                        <div className="col-12">
+                            <textarea ref="digest" type="text" placeholder="摘要" maxLength="50"></textarea>
+                        </div>
                     </div>
                     <input type="submit" value="Submit"/>
                 </form>

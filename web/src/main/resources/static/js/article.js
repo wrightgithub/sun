@@ -1,6 +1,13 @@
 'use strict';
+export function copyarr(arr, start, end) {
+    var four_article = [];
+    for (var i = start; i <= end; i++) {
+        four_article.push(arr[i]);
+    }
 
-const hstyle = {
+    return four_article;
+}
+export const hstyle = {
     margin: 0,
     padding: 0,
     border: 0,
@@ -40,10 +47,10 @@ class Text extends React.Component {
         return (
             <div className="text-right">
                 <h6 style={hstyle}>{article.date}</h6>
-                <h3 style={hstyle}><a href="#">{article.title}</a></h3>
+                <h3 style={hstyle}><a href={article.link}>{article.title}</a></h3>
                 <img src="/static/img/line.png" alt=""/>
                 <p>{article.digest}</p>
-                <p><a href="#">MORE</a></p>
+                <p><a href={article.link}>MORE</a></p>
             </div>
         );
     }
@@ -52,19 +59,21 @@ class Text extends React.Component {
 
 class LinkArticle extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         var article = this.props.article;
         return (
+            article != undefined && article != null &&
             <div className={this.props.className}>
                 <Image src={article.imgSrc}/>
                 <Text article={this.props.article}/>
                 <div className="clear"></div>
             </div>
+
         );
+    }
+
+    constructor(props) {
+        super(props);
     }
 }
 
@@ -81,7 +90,7 @@ class BlogGrid extends React.Component {
     }
 }
 
-export  class Blog extends React.Component {
+export class Blog extends React.Component {
 
 
     render() {
@@ -90,10 +99,6 @@ export  class Blog extends React.Component {
         return (
             temp.articles != null &&
             <div className="wrap">
-                <div className="blog-head">
-                    <h3 >{temp.head}</h3>
-                    <p>{temp.info}</p>
-                </div>
                 <BlogGrid articles={[temp.articles[0],temp.articles[1]]}/>
                 <BlogGrid articles={[temp.articles[2],temp.articles[3]]}/>
             </div>
@@ -103,20 +108,36 @@ export  class Blog extends React.Component {
     }
 }
 
-export default class ShareBlog extends React.Component {
+export class TempBlog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             articles: null,
-            head: 'Share',
-            info: 'best articles for everyone',
+            four_article: [],
+            next_index: 0,
         };
     }
 
     getArticles() {
-        $.get("/articles", function (result) {
-            this.setState({articles: result});
+        $.get(this.props.temp.ajaxurl, function (result) {
+            var four_article = [];
+            var next_index = 0;
+            if (result.length <= 4) {
+                four_article = result;
+                next_index = result.length - 1;
+            } else {
+                four_article = copyarr(result, 0, 3);
+                next_index = 3;
+            }
+
+            this.setState({
+                articles: result,
+                four_article: four_article,
+                next_index: next_index,
+            });
+            console.log("next_index:" + this.state.next_index);
             console.log(result);
+
         }.bind(this));
     }
 
@@ -125,23 +146,98 @@ export default class ShareBlog extends React.Component {
     }
 
 
-    handleClick() {
-        this.getArticles();
+    handleNextClick() {
+        var next_index = this.state.next_index;
+        var len = this.state.articles.length;
+        if (next_index >= len - 1) {
+            return;
+        }
+        var four_article = this.state.four_article;
+
+        if (len - 1 - next_index <= 4) {
+            four_article = copyarr(this.state.articles, next_index + 1, len - 1);
+            next_index = len - 1;
+        } else {
+            four_article = copyarr(this.state.articles, next_index + 1, next_index + 4);
+            next_index = next_index + 4;
+        }
+        console.log(four_article);
+        console.log(next_index)
+        this.setState({
+            four_article: four_article,
+            next_index: next_index,
+        });
+
+    }
+
+    handlePreClick() {
+        var pre_index = this.state.next_index - this.state.four_article.length;
+        if (pre_index < 0) {
+            return;
+        }
+        var four_article = this.state.four_article;
+
+        if (pre_index - 4 <= 0) {
+            four_article = copyarr(this.state.articles, 0, pre_index);
+        } else {
+            four_article = copyarr(this.state.articles, pre_index - 3, pre_index);
+        }
+        console.log(four_article);
+        console.log("pre_index:" + pre_index);
+        this.setState({
+            four_article: four_article,
+            next_index: pre_index,
+        })
+
     }
 
     render() {
         return (
             <div className="blog s3" id="blog">
-                <button style={refreshButton} onClick={this.handleClick.bind(this)}>refresh</button>
-                <Blog temp={this.state}/>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-1">
+                            <button className="btn btn-outline-inverted" onClick={this.handlePreClick.bind(this)}>pre
+                            </button>
+                        </div>
+                        <div className="col-1">
+                            <button className="btn btn-outline-inverted" onClick={this.handleNextClick.bind(this)}>
+                                next
+                            </button>
+                        </div>
+                        <div className="blog-head">
+                            <h3 >{this.props.temp.head}</h3>
+                            <p>{this.props.temp.info}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <Blog temp={{
+                    articles:this.state.four_article,
+                    head: this.state.head,
+                    info: this.state.info,
+                }}/>
             </div>
         );
     }
 }
 
 
+export default class ShareBlog extends React.Component {
 
-// var dom=$("#blog.wrap")[0];
-//  ReactDOM.render(<ShareBlog />, document.getElementById("articles"));
 
-// img,time,title,digest
+    render() {
+
+        return (
+            <div>
+                <TempBlog temp={{
+                 head: 'Share',
+                 info: 'best articles for everyone',
+                 ajaxurl:'/articles',
+                }}/>
+            </div>
+        );
+    }
+}
+
+
