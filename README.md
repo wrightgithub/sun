@@ -31,7 +31,8 @@
     + 如何 需要send json   jquery 要配置"Content-Type": "application/json;charset=UTF-8"
       默认不是这个格式。
       [jquery 设置headers](http://www.cnblogs.com/itjeff/p/6007181.html)
-
+5. SpringBoot下Mysql数据库的中文乱码问题分析
+    + http://www.2cto.com/database/201609/543841.html
 # 数据库设计
 
 

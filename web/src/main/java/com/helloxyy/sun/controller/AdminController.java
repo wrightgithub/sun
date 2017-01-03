@@ -1,6 +1,9 @@
 package com.helloxyy.sun.controller;
 
+import com.helloxyy.sun.mapper.ArticleMapper;
 import com.helloxyy.sun.modle.ArticleDo;
+import com.helloxyy.sun.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -14,19 +17,33 @@ import java.util.Map;
 @Controller
 public class AdminController {
 
-    @RequestMapping(value = "/admin", produces = "text/html;charset=UTF-8")
-    public String submitArticlesView(ModelMap context) {
+    @Autowired
+    private ArticleMapper articleMapper;
 
-        return "screen/admin";
-    }
+    @Autowired
+    private ArticleService articleService;
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     @ResponseBody
-    public String submitArticles(@RequestBody Map<String, Object> data) {
-        ArticleDo article = new ArticleDo();
+    public boolean submitArticles(@RequestBody Map<String, String> data) {
 
-        System.out.println(data);
-        // article.setTitle();
-        return "true";
+        try {
+            ArticleDo article = new ArticleDo();
+            article.setTitle(data.get("title"));
+            article.setDate(data.get("date"));
+            article.setDigest(data.get("digest"));
+            article.setImgSrc(data.get("imgsrc"));
+            article.setLink(data.get("link"));
+            article.setType(Integer.parseInt(data.get("type")));
+            if ("1".equals(data.get("type"))) {
+              // // TODO: 17-1-2 path
+            }
+            System.out.println(data);
+            articleMapper.insert(article);
+            return true;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

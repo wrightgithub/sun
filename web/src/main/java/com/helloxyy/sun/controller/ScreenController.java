@@ -1,15 +1,9 @@
 package com.helloxyy.sun.controller;
 
-import com.helloxyy.sun.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.io.IOException;
-import java.util.*;
 
 /**
  * Created by xyy on 16-12-28.

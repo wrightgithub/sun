@@ -13,6 +13,7 @@ public class Article implements Serializable {
     private String digest;// 摘要
     private String link;
 
+    public Article(){}
     public Article(String date, String digest, String imgSrc, String title) {
         this.date = date;
         this.digest = digest;

@@ -2,16 +2,15 @@ package com.helloxyy.sun.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.helloxyy.sun.mapper.ArticleMapper;
 import com.helloxyy.sun.modle.ArticleDo;
 import com.helloxyy.sun.module.Article;
+import com.helloxyy.sun.service.ArticleService;
+import com.helloxyy.sun.utils.ArticleType;
+import com.helloxyy.sun.utils.ConvertUtil;
 import com.helloxyy.sun.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -28,70 +27,58 @@ import java.util.Random;
 public class BlogController {
 
     @Value("${blog.path}")
-    private String        blogPath;
+    private String         blogPath;
 
     @Autowired
-    private ArticleMapper articleMapper;
-
-    @RequestMapping(value = "/2")
-    public String hello() {
-        return "hello";
-    }
+    private ArticleService articleService;
 
     @RequestMapping(value = "/articles", produces = "application/json;charset=UTF-8")
     public String articles() {
+
         ArrayList<Article> retList = new ArrayList<>();
-        List<Article> list = new ArrayList<>();
+        List<ArticleDo> shareList = null;
         try {
+            shareList = articleService.getArticle(ArticleType.SHARE);
 
-            for (int i = 0; i < 8; i++) {
-                Article article = new Article(new Date().toString(), "摘要" + i, "/static/img/client" + (i + 1) + ".png",
-                                              "title" + i);
-                list.add(article);
-            }
+            // if (shareList == null) {
+            // return null;
+            // }
+            // int size = shareList.size();
+            // if (size <= 4) {
+            // return JSON.toJSONString(shareList, SerializerFeature.DisableCircularReferenceDetect);
+            // }
 
-            int n = 4;
-            while (n-- > 0) {
-                int i = new Random().nextInt(7);
-                retList.add(list.get(i));
-            }
+            // int n = 4;
+            // while (n-- > 0) {
+            // int i = new Random().nextInt(size);
+            // retList.add(ConvertUtil.convertToArticle(shareList.get(i)));
+            // }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         // 来禁止循环引用检测：SerializerFeature.DisableCircularReferenceDetect
-        return JSON.toJSONString(retList, SerializerFeature.DisableCircularReferenceDetect);
+        return JSON.toJSONString(shareList, SerializerFeature.DisableCircularReferenceDetect);
 
     }
 
-    @RequestMapping(value = "original", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/original", produces = "application/json;charset=UTF-8")
     public String original() {
 
-        ArrayList<Article> retList = new ArrayList<>();
-        List<Article> list = new ArrayList<>();
+        List<ArticleDo> originalBlog = null;
         try {
 
-            for (int i = 0; i < 8; i++) {
-                Article article = new Article(new Date().toString(), "摘要" + i, "/static/img/client" + (i + 1) + ".png",
-                                              "title" + i);
-                list.add(article);
-            }
-
-            int n = 4;
-            while (n-- > 0) {
-                int i = new Random().nextInt(7);
-                retList.add(list.get(i));
-            }
-
+            originalBlog = articleService.getArticle(ArticleType.ORIGINAL);
         } catch (Exception e) {
             e.printStackTrace();
         }
         // 来禁止循环引用检测：SerializerFeature.DisableCircularReferenceDetect
-        return JSON.toJSONString(retList, SerializerFeature.DisableCircularReferenceDetect);
+        return JSON.toJSONString(originalBlog, SerializerFeature.DisableCircularReferenceDetect);
+
     }
 
-    @RequestMapping(value = "/blogdetail", produces = "text/html;charset=UTF-8")
-    public String ansyMyBlog() {
+    @RequestMapping(value = "/originaldetail", produces = "text/html;charset=UTF-8")
+    public String originalDetail() {
 
         String blog = "";
         try {
@@ -101,13 +88,6 @@ public class BlogController {
         }
 
         return blog;
-    }
-
-    @RequestMapping(value = "/sunsql", produces = "application/json;charset=UTF-8")
-    public String sqltest() {
-
-        List<ArticleDo> list = articleMapper.findAll();
-        return JSON.toJSONString(list);
     }
 
 }

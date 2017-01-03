@@ -10,14 +10,15 @@
         <result column="digest" property="digest" jdbcType="VARCHAR"/>
         <result column="link" property="link" jdbcType="VARCHAR"/>
         <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="allColumn">
-    id, title ,imgsrc,create_time,digest,link,path
+    id, title ,imgsrc,create_time,digest,link,path,type
     </sql>
 
     <sql id="baseColumn">
-        title ,imgsrc,create_time,digest,link,path
+        title ,imgsrc,create_time,digest,link,path,type
     </sql>
 
     <select id="findAll" resultMap="baseColumnMap">
@@ -40,7 +41,8 @@
         #{article.date},
         #{article.digest},
         #{article.link},
-        #{article.path}
+        #{article.path},
+        #{article.type}
         )
     </select>
 

@@ -1,2 +1,2 @@
 <div id="submitArticles"></div>
-<script type="text/babel" src="/static/js/submitArticles.js"></script>
+<script type="text/babel" src="/static/js/admin/submitArticles.js"></script>
