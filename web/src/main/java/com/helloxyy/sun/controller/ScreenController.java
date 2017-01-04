@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by xyy on 16-12-28.
@@ -15,7 +16,7 @@ public class ScreenController {
     @Value("${blog.path}")
     private String blogPath;
 
-    @RequestMapping(value = {"/","/index"})
+    @RequestMapping(value = { "/", "/index" })
     public String index(ModelMap context) {
 
         context.put("name", "程序员的微生活");
@@ -23,22 +24,22 @@ public class ScreenController {
     }
 
     @RequestMapping("/originalBlog")
-    public String loadMyBlog(ModelMap context) {
+    public String loadMyBlog(@RequestParam String id, ModelMap context) {
 
-//        try {
-//            String blog= FileUtil.read(blogPath+"test.md");
-//            context.put("blog", blog);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        context.put("id", id);
 
         return "screen/originalBlog";
     }
 
-    @RequestMapping(value = "/admin", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/admin/submitArticles", produces = "text/html;charset=UTF-8")
     public String submitArticlesView(ModelMap context) {
 
-        return "screen/admin";
+        return "screen/admin/submitArticles";
     }
 
+    @RequestMapping(value = "/admin/writeBlog", produces = "text/html;charset=UTF-8")
+    public String writeBlog(ModelMap context) {
+
+        return "screen/admin/writeBlog";
+    }
 }

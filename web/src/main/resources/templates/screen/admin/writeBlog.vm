@@ -1,0 +1,2 @@
+<div id="writeBlog"></div>
+<script type="text/babel" src="/static/build/writeBlog.bundle.js"></script>

@@ -11,6 +11,7 @@
     <modules>
         <module>dal</module>
         <module>web</module>
+        <module>common-util</module>
     </modules>
 
     <parent>
@@ -26,6 +27,7 @@
         <platform-bom.version>2.0.5.RELEASE</platform-bom.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <slf4j.version>1.6.6</slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -82,6 +84,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>15.0</version>
+        </dependency>
+        <!--log-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging </artifactId>
         </dependency>
     </dependencies>
 

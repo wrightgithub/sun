@@ -1,5 +1,7 @@
 package com.helloxyy.sun.utils;
 
+import com.helloxyy.sun.util.Debug;
+import org.apache.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -11,6 +13,7 @@ import java.nio.channels.FileChannel;
  */
 public class FileUtil {
 
+    private static Logger logger = Logger.getLogger(FileUtil.class);
     public static String readRelativeFile(String path) throws IOException {
         return FileUtil.read(new ClassPathResource(path).getFile());
     }
@@ -65,11 +68,11 @@ public class FileUtil {
             inputChannel = fis.getChannel();
             outputChannel = fos.getChannel();
 
-            // System.out.println(inputChannel.position()+" "+inputChannel.size());
+            // Debug.debug(inputChannel.position()+" "+inputChannel.size());
             outputChannel.transferFrom(inputChannel, 0, inputChannel.size() / 2);
-            System.out.println(inputChannel.position() + "  " + inputChannel.size());
+            Debug.debug(inputChannel.position() + "  " + inputChannel.size());
             out3.transferFrom(inputChannel, 0, inputChannel.size());
-            System.out.println(inputChannel.position() + "  " + inputChannel.size());
+            Debug.debug(inputChannel.position() + "  " + inputChannel.size());
         } finally {
             fis.close();
             fos.close();
@@ -105,7 +108,7 @@ public class FileUtil {
             output.write(bytes);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+           logger.error(e.getMessage(),e);
         } finally {
             output.close();
         }
@@ -122,11 +125,11 @@ public class FileUtil {
             int bytesRead;
             // while buffer读满了从头覆盖buf继续读
             while ((bytesRead = input.read(buf)) > 0) {
-                // System.out.println(bytesRead);
+                // Debug.debug(bytesRead);
                 output.write(buf, 0, bytesRead);
             }
 
-            // System.out.println(bytesRead);
+            // Debug.debug(bytesRead);
         } finally {
             input.close();
             output.close();

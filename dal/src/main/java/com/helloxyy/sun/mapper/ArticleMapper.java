@@ -14,5 +14,7 @@ public interface ArticleMapper {
 
     List<ArticleDo> findAll();
 
-    void insert(@Param("article") ArticleDo article);
+    void insert(ArticleDo article);
+    List<ArticleDo> findByTitle(@Param("title") String title);
+    List<ArticleDo> findById(@Param("id") int id);
 }

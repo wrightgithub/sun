@@ -44,13 +44,14 @@ class Text extends React.Component {
 
     render() {
         var article = this.props.article;
+        var link=article.link+article.id;
         return (
             <div className="text-right">
                 <h6 style={hstyle}>{article.date}</h6>
-                <h3 style={hstyle}><a href={article.link}>{article.title}</a></h3>
+                <h3 style={hstyle}><a href={link}  target="_blank">{article.title}</a></h3>
                 <img src="/static/img/line.png" alt=""/>
                 <p>{article.digest}</p>
-                <p><a href={article.link}>MORE</a></p>
+                <p><a href={link}  target="_blank">MORE</a></p>
             </div>
         );
     }

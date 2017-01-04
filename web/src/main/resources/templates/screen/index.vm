@@ -34,5 +34,5 @@
 <script type="text/babel" src="/static/js/head.js"></script>
 
 <div id="sunapp"></div>
-<script src="/static/build/bundle.js"></script>
+<script src="/static/build/app.bundle.js"></script>
 

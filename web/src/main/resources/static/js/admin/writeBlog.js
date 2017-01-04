@@ -1,24 +1,20 @@
 'use strict';
-class SubmitArticles extends React.Component {
-
+import MarkdownEditor, {getContent} from "./markdown";
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+class WriteBlog extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.refs);
         var submitData = {
             "title": this.refs.title.value,
             "type": this.refs.type.value,
             "imgsrc": this.refs.imgsrc.value,
-            "link": this.refs.link.value,
             "digest": this.refs.digest.value,
-        }
-        // $.post("/insert",
-        //     JSON.stringify(submitData),
-        //     function (data, status) {
-        //         console.log("数据：" + data + "\n状态：" + status);
-        //     }.bind(this));
+            "content": getContent(),
+        };
 
-
+        console.log(submitData);
         $.ajax({
             url: "/insert",
             type: "POST",
@@ -43,13 +39,12 @@ class SubmitArticles extends React.Component {
     render() {
         return (
             <div>
-                <h1>分享好文章</h1>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className="row">
                         <div className="col-2">
                             <select placeholder="Select One" ref="type">
-                                <option value="0">分享</option>
                                 <option value="1">原创</option>
+                                <option value="0">分享</option>
                             </select>
                         </div>
                         <div className="col-2">
@@ -58,9 +53,6 @@ class SubmitArticles extends React.Component {
                         <div className="col-2">
                             <input type="text" ref="imgsrc" placeholder="图片链接"/>
                         </div>
-                        <div className="col-2">
-                            <input type="text" ref="link" placeholder="文章链接"/>
-                        </div>
                     </div>
                     <div className="row">
                         <div className="col-12">
@@ -68,10 +60,16 @@ class SubmitArticles extends React.Component {
                         </div>
                     </div>
                     <input type="submit" value="Submit"/>
+                    <MarkdownEditor />
+
+
                 </form>
+
             </div>
         );
+
     }
 }
 
-ReactDOM.render(<SubmitArticles />, document.getElementById("submitArticles"));
+
+ReactDOM.render(<WriteBlog/>, document.getElementById("writeBlog"));

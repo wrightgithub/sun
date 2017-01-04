@@ -3,12 +3,12 @@ class OriginalDetail extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.state = {value: 'Type some *markdown* here!'};
+        this.state = {value: null};
     }
 
     getBlog() {
-        $.get("/originaldetail", function (result) {
-            // console.log(result);
+        $.get("/detail?id="+window.blogid, function (result) {
+            console.log(result);
             this.setState({value: result});
         }.bind(this));
     }

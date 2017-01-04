@@ -22,29 +22,40 @@
     </sql>
 
     <select id="findAll" resultMap="baseColumnMap">
-        SELECT <include refid="allColumn"/> FROM article
+        SELECT
+        <include refid="allColumn"/>
+        FROM article
     </select>
 
-    <!--<select id="findActorById" parameterType="int" resultMap="baseColumnMap" flushCache="true">-->
-    <!--SELECT * FROM actor  where actor_id =#{actorId};-->
-    <!--</select>-->
+    <!--mybaties has a propertie called flushCache="true"-->
+    <select id="findByTitle" parameterType="String" resultMap="baseColumnMap">
+        SELECT
+        <include refid="allColumn"/>
+        FROM article where  title =#{title};
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="baseColumnMap">
+        SELECT
+        <include refid="allColumn"/>
+        FROM article where  id =#{id};
+    </select>
 
     <!--<select id="findActor" parameterType="int" resultMap="baseColumnMap">-->
     <!--SELECT * FROM actor  where actor_id =#{actorId};-->
     <!--</select>-->
 
-    <select id="insert" parameterType="java.util.HashMap">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.helloxyy.sun.modle.ArticleDo" >
         INSERT INTO article(<include refid="baseColumn"/>)
         VALUES (
-        #{article.title},
-        #{article.imgSrc},
-        #{article.date},
-        #{article.digest},
-        #{article.link},
-        #{article.path},
-        #{article.type}
+        #{title},
+        #{imgSrc},
+        #{date},
+        #{digest},
+        #{link},
+        #{path},
+        #{type}
         )
-    </select>
+    </insert>
 
     <!--<select id="update" parameterType="java.util.HashMap">-->
     <!--UPDATE actor-->

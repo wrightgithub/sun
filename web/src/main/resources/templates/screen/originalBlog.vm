@@ -1,2 +1,5 @@
 <div id="originalBlog"></div>
+<script>
+    window.blogid=${id}
+</script>
 <script type="text/babel" src="/static/js/originalDetail.js"></script>
