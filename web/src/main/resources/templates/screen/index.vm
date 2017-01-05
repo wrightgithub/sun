@@ -9,9 +9,9 @@
         <ul>
             <!--加#表示跳到当前页面id为×××的地方-->
             <li><a href="#hero" data-speed="1000" class="menuLink scroll">Home</a></li>
-            <li><a href="#about" data-speed="1000" class="menuLink scroll">分享</a></li>
-            <li><a href="#docs" data-speed="1000" class="menuLink scroll">原创</a></li>
-            <li><a href="#docs" data-speed="1000" class="menuLink scroll">写文章</a></li>
+            <li><a href="#articles" data-speed="1000" class="menuLink scroll">分享</a></li>
+            <li><a href="#original" data-speed="1000" class="menuLink scroll">原创</a></li>
+            <li><a href="#" data-speed="1000" class="menuLink scroll">关于我</a></li>
         </ul>
     </div>
 </div>

@@ -27,7 +27,6 @@
         <platform-bom.version>2.0.5.RELEASE</platform-bom.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <slf4j.version>1.6.6</slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -99,17 +98,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
-                <configuration>
-                    <!--因为项目中含有多个@SpringBootApplication,所以需要指定下打包生成的应用入口,一般不应该在项目中存在多个@SpringBootApplication-->
-                    <mainClass>com.helloxyy.sun.BootStrap</mainClass>
-                    <executable>false</executable>
-                    <excludeDevtools>true</excludeDevtools>
-                </configuration>
                 <executions>
                     <execution>
+                        <phase>package</phase>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <!--因为项目中含有多个@SpringBootApplication,所以需要指定下打包生成的应用入口,一般不应该在项目中存在多个@SpringBootApplication-->
+                            <mainClass>com.helloxyy.sun.BootStrap</mainClass>
+                            <executable>false</executable>
+                            <excludeDevtools>true</excludeDevtools>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

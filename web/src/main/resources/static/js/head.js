@@ -8,10 +8,9 @@ class Button extends React.Component {
 
 
     handleClick(arg) {
-        // $.get("/" + arg, function (result) {
-        //     console.log(result);
-        //     this.setState({name: result});
-        // }.bind(this));
+        if(arg=='3'){
+            alert("功能暂未对外开放");
+        }
     }
 
 

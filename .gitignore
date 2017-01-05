@@ -6,6 +6,8 @@
 *.jar
 *.war
 *.ear
+*.bak
+*tree
 
 target
 .idea 
