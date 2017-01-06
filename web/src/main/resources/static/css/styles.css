@@ -29,9 +29,9 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
     padding: 0;
     /*background-image: url('https://images.unsplash.com/photo-1434064511983-18c6dae20ed5?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=5f29d037842c14cb81cddea387221b20');*/
     background-image: url('../img/p1.jpg');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-position: center;
+    /*background-repeat: no-repeat;*/
+    /*background-attachment: fixed;*/
     background-size: cover;
     height: 130vh;
     width: 100vw;
