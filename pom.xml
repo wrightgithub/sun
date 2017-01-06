@@ -11,7 +11,7 @@
     <modules>
         <module>dal</module>
         <module>web</module>
-        <module>common-util</module>
+        <module>common-utils</module>
     </modules>
 
     <parent>

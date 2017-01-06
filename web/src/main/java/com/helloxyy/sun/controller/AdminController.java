@@ -2,7 +2,7 @@ package com.helloxyy.sun.controller;
 
 import com.helloxyy.sun.mapper.ArticleMapper;
 import com.helloxyy.sun.modle.ArticleDo;
-import com.helloxyy.sun.util.Debug;
+import com.helloxyy.sun.utils.Debug;
 import com.helloxyy.sun.utils.FileUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

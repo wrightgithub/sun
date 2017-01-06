@@ -1,9 +1,7 @@
 package com.helloxyy.sun.utils;
 
-import com.helloxyy.sun.util.Debug;
 import org.apache.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
