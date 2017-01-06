@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by xyy on 16-12-28.
@@ -35,11 +36,11 @@ public class BlogController {
 
     @RequestMapping(value = "/articles", produces = "application/json;charset=UTF-8")
     public String articles() {
-        ArrayList<Article> retList = new ArrayList<>();
         List<ArticleDo> shareList = null;
         try {
             shareList = articleService.getArticle(ArticleType.SHARE);
 
+            Collections.sort(shareList, sortByDate());
             // if (shareList == null) {
             // return null;
             // }
@@ -69,6 +70,7 @@ public class BlogController {
         try {
 
             originalBlog = articleService.getArticle(ArticleType.ORIGINAL);
+            Collections.sort(originalBlog, sortByDate());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
@@ -99,6 +101,28 @@ public class BlogController {
         }
 
         return content;
+    }
+
+
+
+
+
+    private Comparator<ArticleDo> sortByDate() {
+        return new Comparator<ArticleDo>() {
+
+            @Override
+            public int compare(ArticleDo o1, ArticleDo o2) {
+                try {
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date d1 = df.parse(o1.getDate());
+                    Date d2 = df.parse(o2.getDate());
+                    return d1.compareTo(d2);
+                } catch (ParseException e) {
+                    logger.error(e.getMessage(), e);
+                }
+                return 0;
+            }
+        };
     }
 
 }

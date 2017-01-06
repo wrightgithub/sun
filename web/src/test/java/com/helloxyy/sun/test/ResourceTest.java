@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Date;
 
 /**
  * Created by xyy on 17-1-1.
@@ -45,6 +46,12 @@ public class ResourceTest {
         System.out.println(FileUtil.readRelativeFile("/blog/test.md"));
     }
 
+
+    @Test
+    public void testDate(){
+        Date date=new Date("2017-01-04 21:38:20");
+        System.out.println(date);
+    }
 
     private void printContent(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));

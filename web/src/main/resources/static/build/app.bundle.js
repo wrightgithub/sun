@@ -183,7 +183,8 @@
 	        key: 'render',
 	        value: function render() {
 	            var article = this.props.article;
-	            var link = article.link + article.id;
+
+	            var link = article.type == '0' ? article.link : "/originalBlog?id=" + article.id;
 	            return React.createElement(
 	                'div',
 	                { className: 'text-right' },

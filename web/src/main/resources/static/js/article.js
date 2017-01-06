@@ -44,7 +44,8 @@ class Text extends React.Component {
 
     render() {
         var article = this.props.article;
-        var link=article.link+article.id;
+
+        var link=article.type=='0'?article.link:"/originalBlog?id="+article.id;
         return (
             <div className="text-right">
                 <h6 style={hstyle}>{article.date}</h6>

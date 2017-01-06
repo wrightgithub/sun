@@ -44,7 +44,7 @@ public class AdminController {
             article.setLink(data.get("link"));
             article.setType(Integer.parseInt(data.get("type")));
             if ("1".equals(data.get("type"))) {
-                article.setLink("/originalBlog?id=");
+//                article.setLink("/originalBlog?id=");
                 // TODO: 17-1-2 path
                 String time = new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString();
                 String path = blogPath + time + "/" + UUID.randomUUID() + ".md";
