@@ -27,6 +27,14 @@ const refreshButton = {
     top: '2%',
     cursor: 'pointer',
 }
+const row_wrap = {
+    width: '100%',
+    height: 'auto',
+}
+const bt_left = {
+    float: 'left',
+    // width: '40%',
+}
 
 class Image extends React.Component {
 
@@ -45,14 +53,14 @@ class Text extends React.Component {
     render() {
         var article = this.props.article;
 
-        var link=article.type=='0'?article.link:"/originalBlog?id="+article.id;
+        var link = article.type == '0' ? article.link : "/originalBlog?id=" + article.id;
         return (
             <div className="text-right">
                 <h6 style={hstyle}>{article.date}</h6>
-                <h3 style={hstyle}><a href={link}  target="_blank">{article.title}</a></h3>
+                <h3 style={hstyle}><a href={link} target="_blank">{article.title}</a></h3>
                 <img src="/static/img/line.png" alt=""/>
                 <p>{article.digest}</p>
-                <p><a href={link}  target="_blank">MORE</a></p>
+                <p><a href={link} target="_blank">MORE</a></p>
             </div>
         );
     }
@@ -198,22 +206,21 @@ export class TempBlog extends React.Component {
             <div className="blog s3" id="blog">
                 <div className="container">
                     <div className="row">
-                        <div className="col-1">
-                            <button className="btn btn-outline-inverted" onClick={this.handlePreClick.bind(this)}>pre
+                        <div style={bt_left}>
+                            <button className="btn btn-outline-inverted" onClick={this.handlePreClick.bind(this)}>上一页
                             </button>
                         </div>
-                        <div className="col-1">
+                        <div style={bt_left}>
                             <button className="btn btn-outline-inverted" onClick={this.handleNextClick.bind(this)}>
-                                next
+                                下一页
                             </button>
-                        </div>
-                        <div className="blog-head">
-                            <h3 >{this.props.temp.head}</h3>
-                            <p>{this.props.temp.info}</p>
                         </div>
                     </div>
+                    <div className="blog-head">
+                        <h3 >{this.props.temp.head}</h3>
+                        <p>{this.props.temp.info}</p>
+                    </div>
                 </div>
-                
                 <Blog temp={{
                     articles:this.state.four_article,
                     head: this.state.head,

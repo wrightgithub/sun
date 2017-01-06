@@ -4,6 +4,7 @@ import com.helloxyy.sun.mapper.ArticleMapper;
 import com.helloxyy.sun.modle.ArticleDo;
 import com.helloxyy.sun.utils.Debug;
 import com.helloxyy.sun.utils.FileUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +50,9 @@ public class AdminController {
                 String time = new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString();
                 String path = blogPath + time + "/" + UUID.randomUUID() + ".md";
                 article.setPath(path);
-                FileUtil.write(path, data.get("content").getBytes());
+                if(!StringUtils.isEmpty(data.get("content"))){
+                    FileUtil.write(path, data.get("content").getBytes());
+                }
             }
             articleMapper.insert(article);
             Debug.debug("id=" + article.getId());

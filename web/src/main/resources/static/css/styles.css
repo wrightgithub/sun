@@ -583,3 +583,165 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
   }
 
 }
+
+@media only screen and (max-width: 1366px) {
+  .wrap {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .wrap {
+    width: 80%;
+  }
+
+  .logos li {
+    margin-right: 10%;
+  }
+
+
+}
+
+@media only screen and (max-width: 1024px) {
+  .wrap {
+    width: 80%;
+  }
+
+
+  .text-right h3 {
+    font-size: 1em;
+  }
+
+  .text-right p {
+    font-size: 0.8255em;
+  }
+
+  .text-right p a {
+    margin-top: -15px;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  .wrap {
+    width: 80%;
+  }
+
+
+
+  .logo {
+    display: block;
+    float: right;
+    margin: -26px 10px 0 0;
+  }
+
+  div.header {
+    position: relative;
+    background: #DE654E;
+    padding: 4% 0;
+    height: 0px;
+  }
+
+
+  .blog-left {
+    width: 44%;
+  }
+
+  .blog-right {
+    width: 45%;
+  }
+
+
+}
+
+@media only screen and (max-width: 640px) {
+
+  .wrap {
+    width: 80%;
+  }
+
+  div.header {
+    padding: 4.4% 0;
+  }
+
+
+  .text-right h3 {
+    font-size: 0.82355em;
+  }
+
+  .text-right p a {
+    margin-top: 2px;
+  }
+
+  .blog-left {
+    width: 43%;
+  }
+
+  .blog-right {
+    width: 43%;
+  }
+
+  .img {
+    padding: 3px 6px;
+    margin-top: 15px;
+  }
+
+
+}
+
+@media only screen and (max-width: 480px) {
+
+  .wrap {
+    width: 80%;
+  }
+
+  div.header {
+    padding: 6.4% 0;
+  }
+
+  .blog-left {
+    width: 95%;
+    float: none;
+  }
+
+  .blog-right {
+    width: 95%;
+    margin-top: 12px;
+    float: none;
+  }
+
+
+}
+
+@media only screen and (max-width: 320px) {
+
+  .wrap {
+    width: 80%;
+  }
+
+  div.header {
+    padding: 9.4% 0;
+  }
+
+  .blog-left {
+    width: 90%;
+    float: none;
+  }
+
+  .blog-right {
+    width: 90%;
+    float: none;
+  }
+
+  .img-left {
+    float: none;
+    width: 100%;
+  }
+
+  .text-right {
+    float: none;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+}

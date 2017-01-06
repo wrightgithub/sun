@@ -146,6 +146,13 @@
 	    top: '2%',
 	    cursor: 'pointer'
 	};
+	var row_wrap = {
+	    width: '100%',
+	    height: 'auto'
+	};
+	var bt_left = {
+	    float: 'left'
+	};
 
 	var Image = function (_React$Component) {
 	    _inherits(Image, _React$Component);
@@ -404,35 +411,35 @@
 	                        { className: 'row' },
 	                        React.createElement(
 	                            'div',
-	                            { className: 'col-1' },
+	                            { style: bt_left },
 	                            React.createElement(
 	                                'button',
 	                                { className: 'btn btn-outline-inverted', onClick: this.handlePreClick.bind(this) },
-	                                'pre'
+	                                '\u4E0A\u4E00\u9875'
 	                            )
 	                        ),
 	                        React.createElement(
 	                            'div',
-	                            { className: 'col-1' },
+	                            { style: bt_left },
 	                            React.createElement(
 	                                'button',
 	                                { className: 'btn btn-outline-inverted', onClick: this.handleNextClick.bind(this) },
-	                                'next'
+	                                '\u4E0B\u4E00\u9875'
 	                            )
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'blog-head' },
+	                        React.createElement(
+	                            'h3',
+	                            null,
+	                            this.props.temp.head
 	                        ),
 	                        React.createElement(
-	                            'div',
-	                            { className: 'blog-head' },
-	                            React.createElement(
-	                                'h3',
-	                                null,
-	                                this.props.temp.head
-	                            ),
-	                            React.createElement(
-	                                'p',
-	                                null,
-	                                this.props.temp.info
-	                            )
+	                            'p',
+	                            null,
+	                            this.props.temp.info
 	                        )
 	                    )
 	                ),

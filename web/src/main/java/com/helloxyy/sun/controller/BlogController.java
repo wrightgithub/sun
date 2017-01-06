@@ -55,6 +55,7 @@ public class BlogController {
             // retList.add(ConvertUtil.convertToArticle(shareList.get(i)));
             // }
 
+
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
@@ -116,7 +117,7 @@ public class BlogController {
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Date d1 = df.parse(o1.getDate());
                     Date d2 = df.parse(o2.getDate());
-                    return d1.compareTo(d2);
+                    return d2.compareTo(d1);
                 } catch (ParseException e) {
                     logger.error(e.getMessage(), e);
                 }
